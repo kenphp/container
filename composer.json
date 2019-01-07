@@ -1,7 +1,7 @@
 {
     "name": "kenphp/container",
     "description": "PSR-11 compliant PHP container",
-    "type": "library, container",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
