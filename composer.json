@@ -1,0 +1,21 @@
+{
+    "name": "kenphp/container",
+    "description": "PSR-11 compliant PHP container",
+    "type": "library, container",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "juliardi",
+            "email": "ardi93@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "psr/container": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ken\\Container\\": "src/"
+        }
+    }
+}
