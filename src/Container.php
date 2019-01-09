@@ -15,6 +15,13 @@ class Container implements \Psr\Container\ContainerInterface {
     protected $_items = [];
 
     /**
+     * @param array $items
+     */
+    public function __construct($items = []) {
+        $this->_items = $items;
+    }
+
+    /**
      * Sets an item into container
      * @param string $id   Identifier of the item
      * @param mixed $item  The item to be saved into the container
