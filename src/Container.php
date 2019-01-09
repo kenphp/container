@@ -25,27 +25,9 @@ class Container implements \Psr\Container\ContainerInterface {
      * Sets an item into container
      * @param string $id   Identifier of the item
      * @param mixed $item  The item to be saved into the container
-     * @throws ContainerException Identifier **id** has been used.
      */
     public function set($id, $item) {
-        if ($this->has($id)) {
-            throw new ContainerException("Identifier `{$id}` has been used.");
-        }
-
-        $this->_items[$id] = $item;
-    }
-
-    /**
-     * Redefines item in the container
-     * @param  string $id   Identifier of the item
-     * @param  mixed $item  The item to be saved into the container
-     * @throws NotFoundException No entry was found for **id** identifier.
-     */
-    public function redefine($id, $item) {
-        if (!$this->has($id)) {
-            throw new NotFoundException("No entry was found for `{$id}` identifier.");
-        }
-
+        unset($this->_items[$id]);
         $this->_items[$id] = $item;
     }
 
