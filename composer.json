@@ -17,5 +17,9 @@
         "psr-4": {
             "Ken\\Container\\": "src/"
         }
+    },
+    "require-dev": {
+        "codeception/codeception": "^2.5",
+        "codeception/specify": "^1.1"
     }
 }
