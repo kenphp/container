@@ -15,6 +15,11 @@ class Container implements \Psr\Container\ContainerInterface {
     protected $_items = [];
 
     /**
+     * @var array
+     */
+    protected $_services = [];
+
+    /**
      * @param array $items
      */
     public function __construct($items = []) {
@@ -39,11 +44,19 @@ class Container implements \Psr\Container\ContainerInterface {
             throw new NotFoundException("No entry was found for `{$id}` identifier.");
         }
 
+        if (isset($this->_services[$id])) {
+            return $this->_services[$id];
+        }
+
         $item = $this->_items[$id];
 
         try {
             if (is_callable($item)) {
                 $item = call_user_func($item, $this);
+
+                if (is_object($item)) {
+                    $this->_services[$id] = $item;
+                }
             }
         } catch (Exception $e) {
             throw new ContainerException('Error while retrieving the entry. ' . $e->getMessage());
