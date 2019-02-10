@@ -20,6 +20,11 @@ class Container implements \Psr\Container\ContainerInterface {
     protected $_services = [];
 
     /**
+     * @var array
+     */
+    protected $_singleton_id = [];
+
+    /**
      * @param array $items
      */
     public function __construct($items = []) {
@@ -34,6 +39,18 @@ class Container implements \Psr\Container\ContainerInterface {
     public function set($id, $item) {
         unset($this->_items[$id]);
         $this->_items[$id] = $item;
+    }
+
+    /**
+     * Sets an item as singleton factory
+     * @param string   $id      Identifier of the item
+     * @param callable $factory A callable that returns a singleton object
+     */
+    public function setSingletonFactory($id, callable $factory) {
+        if (!in_array($id, $this->_singleton_id)) {
+            $this->_singleton_id[] = $id;
+        }
+        $this->set($id, $factory);
     }
 
     /**
@@ -54,7 +71,7 @@ class Container implements \Psr\Container\ContainerInterface {
             if (is_callable($item)) {
                 $item = call_user_func($item, $this);
 
-                if (is_object($item)) {
+                if (is_object($item) && in_array($id, $this->_singleton_id)) {
                     $this->_services[$id] = $item;
                 }
             }
