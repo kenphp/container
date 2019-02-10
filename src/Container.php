@@ -22,7 +22,7 @@ class Container implements \Psr\Container\ContainerInterface {
     /**
      * @var array
      */
-    protected $_singleton_id = [];
+    protected $_factory_id = [];
 
     /**
      * @param array $items
@@ -42,13 +42,13 @@ class Container implements \Psr\Container\ContainerInterface {
     }
 
     /**
-     * Sets an item as singleton factory
+     * Sets an item as an object factory
      * @param string   $id      Identifier of the item
-     * @param callable $factory A callable that returns a singleton object
+     * @param callable $factory A callable that returns an object
      */
-    public function setSingletonFactory($id, callable $factory) {
-        if (!in_array($id, $this->_singleton_id)) {
-            $this->_singleton_id[] = $id;
+    public function setFactory($id, callable $factory) {
+        if (!in_array($id, $this->_factory_id)) {
+            $this->_factory_id[] = $id;
         }
         $this->set($id, $factory);
     }
@@ -71,7 +71,7 @@ class Container implements \Psr\Container\ContainerInterface {
             if (is_callable($item)) {
                 $item = call_user_func($item, $this);
 
-                if (is_object($item) && in_array($id, $this->_singleton_id)) {
+                if (is_object($item) && !in_array($id, $this->_factory_id)) {
                     $this->_services[$id] = $item;
                 }
             }
