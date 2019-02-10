@@ -11,6 +11,21 @@ The easiest way to install is using Composer
 $ composer require kenphp/container
 ```
 
+## Methods
+List of available methods :
+- `get($id)`
+
+    Finds an entry of the container by its identifier and returns it.
+- `has($id)`
+
+    Returns true if the container can return an entry for the given identifier. Returns false otherwise.
+- `set($id, $item)`
+
+    Sets an item into container. The `item` can be a value or a function. If the function returns an object, it will be treated as a singleton.
+- `setFactory($id, callable $factory)`
+
+    Sets an object factory. The `factory` must be an instance of `callable` that returns an object and the `factory` will be called whenever the item is fetched using `get` method.
+
 ## Example
 ```php
 <?php

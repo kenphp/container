@@ -1,6 +1,8 @@
 <?php
 namespace Test;
 
+use DateTime;
+
 use Ken\Container\Container;
 use Ken\Container\NotFoundException;
 
@@ -72,5 +74,18 @@ class ContainerTest extends \Codeception\Test\Unit
         $this->assertEquals(true, $hasTitle, 'Should be true');
         $hasNothing = $this->container->has('nothing');
         $this->assertEquals(false, $hasNothing, 'Should be fals');
+    }
+
+    /**
+     * Test **\Ken\Container\Container::setFactory()** method
+     */
+    public function testSetFactoryMethod() {
+        $this->specify('Test SetFactory', function () {
+            $fn = function() {
+                return new DateTime();
+            };
+            $this->container->set('fn', $fn);
+            $this->assertInstanceOf(DateTime::class, $this->container->get('fn'), "Identifier 'id' should be an instance of 'DateTime' class");
+        });
     }
 }

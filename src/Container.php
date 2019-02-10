@@ -32,7 +32,8 @@ class Container implements \Psr\Container\ContainerInterface {
     }
 
     /**
-     * Sets an item into container
+     * Sets an item into container. The `item` can be a value or a function.
+     * If the function returns an object, it will be treated as a singleton.
      * @param string $id   Identifier of the item
      * @param mixed $item  The item to be saved into the container
      */
