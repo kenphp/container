@@ -1,4 +1,4 @@
-## Container
+## Container [![Build Status](https://travis-ci.org/kenphp/container.svg?branch=master)](https://travis-ci.org/kenphp/container)
 A simple PSR-11 compliant PHP container.
 This library is part of KenPHP Project, but can be used independently.
 
